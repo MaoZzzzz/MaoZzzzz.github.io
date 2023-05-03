@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>毛泽政的博客</title>
   
-  
+  <subtitle>AME</subtitle>
   <link href="https://maozzzzz.github.io/atom.xml" rel="self"/>
   
   <link href="https://maozzzzz.github.io/"/>
-  <updated>2023-05-03T08:27:01.671Z</updated>
+  <updated>2023-05-03T10:51:41.891Z</updated>
   <id>https://maozzzzz.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Visionfive2 GO环境</title>
+    <link href="https://maozzzzz.github.io/2023/05/03/visionfive2go-huan-jing/"/>
+    <id>https://maozzzzz.github.io/2023/05/03/visionfive2go-huan-jing/</id>
+    <published>2023-05-03T10:18:19.000Z</published>
+    <updated>2023-05-03T10:51:41.891Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Visionfive2-GO环境&quot;&gt;&lt;a href=&quot;#Visionfive2-GO环境&quot; class=&quot;headerlink&quot; title=&quot;Visionfive2 GO环境&quot;&gt;&lt;/a&gt;Visionfive2 GO环境&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="VisionFive2" scheme="https://maozzzzz.github.io/categories/VisionFive2/"/>
+    
+    
+    <category term="VisionFive2" scheme="https://maozzzzz.github.io/tags/VisionFive2/"/>
+    
+  </entry>
   
   <entry>
     <title>Visionfive2开发板启动</title>

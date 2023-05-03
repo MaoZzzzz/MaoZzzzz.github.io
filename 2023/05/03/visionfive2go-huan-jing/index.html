@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Visionfive2开发板启动, “程序员”">
+    <meta name="keywords" content="Visionfive2 GO环境, “程序员”">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Visionfive2开发板启动 | 毛泽政的博客</title>
+    <title>Visionfive2 GO环境 | 毛泽政的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Visionfive2开发板启动</h1>
+                    <h1 class="description center-align post-title">Visionfive2 GO环境</h1>
                 </div>
             </div>
         </div>
@@ -478,52 +478,36 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="VisionFive2-开发板启动"><a href="#VisionFive2-开发板启动" class="headerlink" title="VisionFive2 开发板启动"></a>VisionFive2 开发板启动</h1><h2 id="内核更新"><a href="#内核更新" class="headerlink" title="内核更新"></a>内核更新</h2><h3 id="1-挂载sd卡："><a href="#1-挂载sd卡：" class="headerlink" title="1.挂载sd卡："></a>1.挂载sd卡：</h3><p>​	1.在工作的ubuntu系统下列出设备:</p>
-<pre class=" language-shell"><code class="language-shell">fdisk -l
+                <h1 id="Visionfive2-GO环境"><a href="#Visionfive2-GO环境" class="headerlink" title="Visionfive2 GO环境"></a>Visionfive2 GO环境</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这篇博客会主要介绍怎么从源码中构建最新版本的GoLang。</p>
+<h2 id="引导主机上"><a href="#引导主机上" class="headerlink" title="引导主机上"></a>引导主机上</h2><p>1.在引导主机上</p>
+<pre class=" language-shell"><code class="language-shell">git clone https://github.com/golang/go
 </code></pre>
-<p><img src="/2023/05/03/visionfive2-kai-fa-ban-qi-dong/%E8%AE%BE%E5%A4%87%E6%83%85%E5%86%B51.png" alt="设备情况1"></p>
-<p>​	2.将文件系统进行挂载，需要挂载两部分，如下：</p>
-<pre class=" language-shell"><code class="language-shell">mount /dev/sdb2 /media/mao/root/boot/
-mount /dev/sdb3 /media/mao/root/usr/
+<p>2.进入src文件中，交叉编译</p>
+<pre class=" language-shell"><code class="language-shell">cd go/src
+GOOS=linux GOARCH=riscv64 ./bootstrap.bash
 </code></pre>
-<p>​	3.将制作好的内核文件和启动文件分别拷贝至对应文件夹下：</p>
-<pre class=" language-shell"><code class="language-shell"># 对于启动文件
-cp /home/mao/tmp/vmlinuz-5.15.0-starfive /media/mao/root/boot/boot/ && sync
-cp /home/mao/tmp/config-5.15.0-starfive /media/mao/root/boot/boot/ && sync
-cp /home/mao/tmp/System.map-5.15.0-starfive /media/mao/root/boot/boot/ && sync
+<p>3.将编译完的包打包到开发板上</p>
+<pre class=" language-shell"><code class="language-shell">scp -P 22222 ../../go-linux-riscv64-bootstrap.tbz root@localhost:
+</code></pre>
+<h2 id="开发板上"><a href="#开发板上" class="headerlink" title="开发板上"></a>开发板上</h2><p>1.获得源码</p>
+<pre class=" language-shell"><code class="language-shell"># 二选一即可
+tar vxf go-linux-riscv64-bootstrap.tbz      
+git clone https://github.com/golang/go
+</code></pre>
+<p>2.切换到最新版本</p>
+<p>也可以切换到需要的版本</p>
+<pre class=" language-shell"><code class="language-shell">git checkout $(git --git-dir ./go/.git describe --tags)
+</code></pre>
+<p>3.编译源码</p>
+<pre class=" language-shell"><code class="language-shell">cd go/src
+export GOROOT_BOOTSTRAP=$HOME/go-linux-riscv64-bootstrap
+./make.bash
+</code></pre>
+<p>4.最后可以打包成压缩文件（可选）</p>
+<pre class=" language-shell"><code class="language-shell">cd ..
+tar -cvf $(git --git-dir ./go/.git describe --tags).$(uname -s |tr [:upper:] [:lower:])-$(uname -m).tar --exclude=pkg/obj --exclude=.git go
+</code></pre>
 
-# 对于内核镜像
-cp /home/mao/tmp/linux-image-5.15.0-starfive_5.15.0-starfive-1_riscv64.deb /media/mao/root/usr/ && sync
-cp /home/mao/tmp/linux-libc-dev_5.15.0-starfive-1_riscv64.deb /media/mao/root/usr/ && sync
-cp /home/mao/tmp/linux-headers-5.15.0-starfive_5.15.0-starfive-1_riscv64.deb /media/mao/root/usr/ && sync
-</code></pre>
-<h3 id="2-使用sd卡启动开发板："><a href="#2-使用sd卡启动开发板：" class="headerlink" title="2.使用sd卡启动开发板："></a>2.使用sd卡启动开发板：</h3><p>在完成上述操作后启动开发板会进入紧急模式，输入root下的密码即可登录</p>
-<p>​	1.登录后在 <code>/</code> 目录下能够看到拷贝完成的三个内核文件，然后执行以下命令，<strong>注意要按照顺序执行</strong>：</p>
-<pre class=" language-shell"><code class="language-shell">dpkg -i linux-headers-5.15.0-starfive_5.15.0-starfive-1_riscv64.deb
-dpkg -i linux-libc-dev_5.15.0-starfive-1_riscv64.deb
-dpkg -i linux-image-5.15.0-starfive_5.15.0-starfive-1_riscv64.deb
-</code></pre>
-<p>​	2.重启系统后应该是能够进入正常的登录界面就可以了。</p>
-<h2 id="磁盘无损扩展"><a href="#磁盘无损扩展" class="headerlink" title="磁盘无损扩展"></a>磁盘无损扩展</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这一步是因为我的SD卡是32G的，但是下载的镜像中只有16G，并且我认为扩展现有的分区在使用的时候体验更好。</p>
-<h3 id="使用growpart进行扩展"><a href="#使用growpart进行扩展" class="headerlink" title="使用growpart进行扩展"></a>使用<code>growpart</code>进行扩展</h3><p>1.安装<code>growpart</code></p>
-<pre class=" language-shell"><code class="language-shell">apt install cloud-utils
-</code></pre>
-<p>2.查看磁盘分区</p>
-<pre class=" language-shell"><code class="language-shell">fdisk -l
-</code></pre>
-<p><img src="/2023/05/03/visionfive2-kai-fa-ban-qi-dong/%E8%AE%BE%E5%A4%87%E6%83%85%E5%86%B52.png" alt="设备情况2"></p>
-<p>可以看到有这样三个分区，我要扩展的就是第三个分区</p>
-<p>3.扩展分区</p>
-<pre class=" language-shell"><code class="language-shell"># 扩容mmcblk1p3
-growpart /dev/mmcblk1 3
-# output
-# CHANGED: partition=3 start=239616 old: size=32526303 end=32765918 new: size=60827615 end=61067230
-
-# 加载文件系统并检查 4K 对齐
-resize2fs /dev/mmcblk1p3
-</code></pre>
-<p>4.重启系统</p>
-<h2 id><a href="#" class="headerlink" title></a></h2>
                 
             </div>
             <hr/>
@@ -549,7 +533,7 @@ resize2fs /dev/mmcblk1p3
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://maozzzzz.github.io/2023/05/03/visionfive2-kai-fa-ban-qi-dong/">https://maozzzzz.github.io/2023/05/03/visionfive2-kai-fa-ban-qi-dong/</a>
+                    <a href="https://maozzzzz.github.io/2023/05/03/visionfive2go-huan-jing/">https://maozzzzz.github.io/2023/05/03/visionfive2go-huan-jing/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -758,9 +742,10 @@ resize2fs /dev/mmcblk1p3
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2023/05/03/visionfive2go-huan-jing/">
                     <div class="card-image">
@@ -778,9 +763,9 @@ resize2fs /dev/mmcblk1p3
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-03
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -793,6 +778,7 @@ resize2fs /dev/mmcblk1p3
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -808,7 +794,7 @@ resize2fs /dev/mmcblk1p3
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2023/05/03/visionfive2-kai-fa-ban-qi-dong/">
@@ -842,7 +828,6 @@ resize2fs /dev/mmcblk1p3
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     

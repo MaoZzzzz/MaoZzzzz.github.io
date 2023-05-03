@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Visionfive2 GO环境</title>
+      <link href="/2023/05/03/visionfive2go-huan-jing/"/>
+      <url>/2023/05/03/visionfive2go-huan-jing/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Visionfive2-GO环境"><a href="#Visionfive2-GO环境" class="headerlink" title="Visionfive2 GO环境"></a>Visionfive2 GO环境</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这篇博客会主要介绍怎么从源码中构建最新版本的GoLang。</p><h2 id="引导主机上"><a href="#引导主机上" class="headerlink" title="引导主机上"></a>引导主机上</h2><p>1.在引导主机上</p><pre class=" language-shell"><code class="language-shell">git clone https://github.com/golang/go</code></pre><p>2.进入src文件中，交叉编译</p><pre class=" language-shell"><code class="language-shell">cd go/srcGOOS=linux GOARCH=riscv64 ./bootstrap.bash</code></pre><p>3.将编译完的包打包到开发板上</p><pre class=" language-shell"><code class="language-shell">scp -P 22222 ../../go-linux-riscv64-bootstrap.tbz root@localhost:</code></pre><h2 id="开发板上"><a href="#开发板上" class="headerlink" title="开发板上"></a>开发板上</h2><p>1.获得源码</p><pre class=" language-shell"><code class="language-shell"># 二选一即可tar vxf go-linux-riscv64-bootstrap.tbz      git clone https://github.com/golang/go</code></pre><p>2.切换到最新版本</p><p>也可以切换到需要的版本</p><pre class=" language-shell"><code class="language-shell">git checkout $(git --git-dir ./go/.git describe --tags)</code></pre><p>3.编译源码</p><pre class=" language-shell"><code class="language-shell">cd go/srcexport GOROOT_BOOTSTRAP=$HOME/go-linux-riscv64-bootstrap./make.bash</code></pre><p>4.最后可以打包成压缩文件（可选）</p><pre class=" language-shell"><code class="language-shell">cd ..tar -cvf $(git --git-dir ./go/.git describe --tags).$(uname -s |tr [:upper:] [:lower:])-$(uname -m).tar --exclude=pkg/obj --exclude=.git go</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> VisionFive2 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> VisionFive2 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Visionfive2开发板启动</title>
       <link href="/2023/05/03/visionfive2-kai-fa-ban-qi-dong/"/>
       <url>/2023/05/03/visionfive2-kai-fa-ban-qi-dong/</url>
