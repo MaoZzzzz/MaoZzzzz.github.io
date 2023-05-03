@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Visionfive2科学上网</title>
+      <link href="/2023/05/03/visionfive2-ke-xue-shang-wang/"/>
+      <url>/2023/05/03/visionfive2-ke-xue-shang-wang/</url>
+      
+        <content type="html"><![CDATA[<h1 id="VisionFive2-科学上网"><a href="#VisionFive2-科学上网" class="headerlink" title="VisionFive2 科学上网"></a>VisionFive2 科学上网</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于我使用的是实验室公用的服务器，安装clash过于频繁了，所以单独用一篇写一下。</p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="1-版本选择"><a href="#1-版本选择" class="headerlink" title="1.版本选择"></a>1.版本选择</h3><p>由于比较新的版本没有riscv64版本的，所以暂时选择了 v1.13.0 版本：</p><pre class=" language-shell"><code class="language-shell">wget https://github.com/Dreamacro/clash/releases/download/v1.13.0/clash-linux-riscv64-v1.13.0.gz</code></pre><h3 id="2-下载完成后直接解压缩到-usr-local-bin目录下"><a href="#2-下载完成后直接解压缩到-usr-local-bin目录下" class="headerlink" title="2.下载完成后直接解压缩到/usr/local/bin目录下"></a>2.下载完成后直接解压缩到<code>/usr/local/bin</code>目录下</h3><pre class=" language-shell"><code class="language-shell">gzip -dc clash-linux-riscv64-v1.13.0.gz > /usr/local/bin/clashchmod +x /usr/local/bin/clash# 能省一点就省一点rm -f clash-linux-riscv64-v1.13.0.gz</code></pre><h3 id="3-下载-MMDB-文件"><a href="#3-下载-MMDB-文件" class="headerlink" title="3.下载 MMDB 文件"></a>3.下载 MMDB 文件</h3><p>这里要说明一下，由于我的clash是要和别的同学分开的，所以就不开启service了。</p><pre class=" language-shell"><code class="language-shell"># 在你想在的文件夹下mkdir clashcd clashwget -O Country.mmdb https://github.com/Dreamacro/maxmind-geoip/releases/download/20220812/Country.mmdb</code></pre><h3 id="4-环境变量"><a href="#4-环境变量" class="headerlink" title="4.环境变量"></a>4.环境变量</h3><pre class=" language-shell"><code class="language-shell">export http_proxy="127.0.0.1:7890"export https_proxy="127.0.0.1:7890"export no_proxy="localhost, 127.0.0.1"</code></pre><p>使用的时候source一下。</p><h3 id="5-导入订阅链接"><a href="#5-导入订阅链接" class="headerlink" title="5.导入订阅链接"></a>5.导入订阅链接</h3><pre class=" language-shell"><code class="language-shell">wget -O <your path>/config.yaml [你的订阅链接]# 或者从其他地方复制过来也是可以的捏</code></pre><h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> VisionFive2 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> VisionFive2 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Visionfive2 GO环境</title>
       <link href="/2023/05/03/visionfive2go-huan-jing/"/>
       <url>/2023/05/03/visionfive2go-huan-jing/</url>
