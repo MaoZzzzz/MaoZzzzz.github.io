@@ -6,7 +6,7 @@
   <link href="https://maozzblog.github.io/atom.xml" rel="self"/>
   
   <link href="https://maozzblog.github.io/"/>
-  <updated>2023-05-03T08:07:44.699Z</updated>
+  <updated>2023-05-03T08:27:01.671Z</updated>
   <id>https://maozzblog.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>VisionFive2开发板启动</title>
+    <title>Visionfive2开发板启动</title>
     <link href="https://maozzblog.github.io/2023/05/03/visionfive2-kai-fa-ban-qi-dong/"/>
     <id>https://maozzblog.github.io/2023/05/03/visionfive2-kai-fa-ban-qi-dong/</id>
-    <published>2023-05-03T07:45:23.000Z</published>
-    <updated>2023-05-03T08:07:44.699Z</updated>
+    <published>2023-05-03T08:14:18.000Z</published>
+    <updated>2023-05-03T08:27:01.671Z</updated>
     
     
       
@@ -34,29 +34,10 @@
     
     
     
-    <category term="visionfive2" scheme="https://maozzblog.github.io/categories/visionfive2/"/>
+    <category term="VisionFive2" scheme="https://maozzblog.github.io/categories/VisionFive2/"/>
     
     
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://maozzblog.github.io/2023/05/03/hello-world/"/>
-    <id>https://maozzblog.github.io/2023/05/03/hello-world/</id>
-    <published>2023-05-03T04:14:33.708Z</published>
-    <updated>2023-05-03T04:14:33.708Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
-        
-      
-    
-    
-    
+    <category term="VisionFive2" scheme="https://maozzblog.github.io/tags/VisionFive2/"/>
     
   </entry>
   
