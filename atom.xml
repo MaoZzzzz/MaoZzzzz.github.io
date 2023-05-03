@@ -3,11 +3,11 @@
   <title>Hexo</title>
   
   
-  <link href="https://maoblog.github.io/atom.xml" rel="self"/>
+  <link href="https://maozzblog.github.io/atom.xml" rel="self"/>
   
-  <link href="https://maoblog.github.io/"/>
+  <link href="https://maozzblog.github.io/"/>
   <updated>2023-05-03T04:14:33.708Z</updated>
-  <id>https://maoblog.github.io/</id>
+  <id>https://maozzblog.github.io/</id>
   
   <author>
     <name>John Doe</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="https://maoblog.github.io/2023/05/03/hello-world/"/>
-    <id>https://maoblog.github.io/2023/05/03/hello-world/</id>
+    <link href="https://maozzblog.github.io/2023/05/03/hello-world/"/>
+    <id>https://maozzblog.github.io/2023/05/03/hello-world/</id>
     <published>2023-05-03T04:14:33.708Z</published>
     <updated>2023-05-03T04:14:33.708Z</updated>
     
