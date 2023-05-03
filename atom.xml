@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
+  <title>毛泽政的博客</title>
   
   
   <link href="https://maozzblog.github.io/atom.xml" rel="self"/>
   
   <link href="https://maozzblog.github.io/"/>
-  <updated>2023-05-03T04:14:33.708Z</updated>
+  <updated>2023-05-03T07:46:13.561Z</updated>
   <id>https://maozzblog.github.io/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>毛泽政</name>
     
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>VisionFive2开发板启动</title>
+    <link href="https://maozzblog.github.io/2023/05/03/visionfive2-kai-fa-ban-qi-dong/"/>
+    <id>https://maozzblog.github.io/2023/05/03/visionfive2-kai-fa-ban-qi-dong/</id>
+    <published>2023-05-03T07:45:23.000Z</published>
+    <updated>2023-05-03T07:46:13.561Z</updated>
+    
+    
+    
+    
+    
+    <category term="VisionFive2" scheme="https://maozzblog.github.io/tags/VisionFive2/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
