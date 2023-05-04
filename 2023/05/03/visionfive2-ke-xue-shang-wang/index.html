@@ -471,16 +471,17 @@ mkdir clash
 cd clash
 wget -O Country.mmdb https://github.com/Dreamacro/maxmind-geoip/releases/download/20220812/Country.mmdb
 </code></pre>
-<h3 id="4-环境变量"><a href="#4-环境变量" class="headerlink" title="4.环境变量"></a>4.环境变量</h3><pre class=" language-shell"><code class="language-shell">export http_proxy="127.0.0.1:7890"
+<h3 id="4-环境变量"><a href="#4-环境变量" class="headerlink" title="4.环境变量"></a>4.环境变量</h3><p>创建一个proxy文件。</p>
+<pre class=" language-shell"><code class="language-shell">export http_proxy="127.0.0.1:7890"
 export https_proxy="127.0.0.1:7890"
 export no_proxy="localhost, 127.0.0.1"
 </code></pre>
 <p>使用的时候source一下。</p>
-<h3 id="5-导入订阅链接"><a href="#5-导入订阅链接" class="headerlink" title="5.导入订阅链接"></a>5.导入订阅链接</h3><pre class=" language-shell"><code class="language-shell">wget -O <your path>/config.yaml [你的订阅链接]
+<h3 id="5-导入订阅链接"><a href="#5-导入订阅链接" class="headerlink" title="5.导入订阅链接"></a>5.导入订阅链接</h3><pre class=" language-shell"><code class="language-shell">wget -O ~/clash/config.yaml [你的订阅链接]
 # 或者从其他地方复制过来也是可以的捏
 </code></pre>
 <h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>最后就是启动了，注意我这里是在我的config的文件夹下。</p>
-<pre class=" language-shell"><code class="language-shell">source <proxy的位置>
+<pre class=" language-shell"><code class="language-shell">source ~/clash/proxy
 clash -d .
 </code></pre>
 <p><img src="/2023/05/03/visionfive2-ke-xue-shang-wang/%E6%88%90%E5%8A%9F%E5%90%AF%E5%8A%A8.png" alt="成功启动"></p>
