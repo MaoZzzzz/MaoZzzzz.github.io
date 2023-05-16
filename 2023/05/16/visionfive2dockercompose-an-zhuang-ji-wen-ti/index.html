@@ -458,19 +458,19 @@
             <div id="articleContent">
                 <h1 id="Visionfive2-DockerCompose安装及问题"><a href="#Visionfive2-DockerCompose安装及问题" class="headerlink" title="Visionfive2 DockerCompose安装及问题"></a>Visionfive2 DockerCompose安装及问题</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>已经安装好docker，安装步骤见 <a target="_blank" rel="noopener" href="https://doc.rvspace.org/VisionFive2/Application_Notes/VisionFive2_AN_Docker/">Visionfive2安装docker</a></p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>主机版本如下</p>
-<p><img src="/2023/05/16/visionfive2dockercompose-an-zhuang-ji-wen-ti/Visionfive2DockerCompose%E5%AE%89%E8%A3%85%E5%8F%8A%E9%97%AE%E9%A2%98%5Cimage-20230516182735702.png" alt="image-20230516182735702"></p>
+<p><img src="/2023/05/16/visionfive2dockercompose-an-zhuang-ji-wen-ti/image-20230516182735702.png" alt="image-20230516182735702"></p>
 <p>安装命令</p>
 <pre class=" language-shell"><code class="language-shell">apt install python3 python3-dev python3-pip
 pip3 install docker-compose
 </code></pre>
 <h2 id="问题还原"><a href="#问题还原" class="headerlink" title="问题还原"></a>问题还原</h2><h3 id="问题一："><a href="#问题一：" class="headerlink" title="问题一："></a>问题一：</h3><p>安装 bcrypt 包时报错：</p>
-<p><img src="/2023/05/16/visionfive2dockercompose-an-zhuang-ji-wen-ti/.%5CVisionfive2DockerCompose%E5%AE%89%E8%A3%85%E5%8F%8A%E9%97%AE%E9%A2%98%5Cimage-20230516183107854.png" alt="image-20230516183107854"></p>
+<p><img src="/2023/05/16/visionfive2dockercompose-an-zhuang-ji-wen-ti/image-20230516183107854.png" alt="image-20230516183107854"></p>
 <p><strong>解决方法：</strong></p>
 <p><code>setuptools</code>的版本问题，需要更新<code>pip3</code>和<code>setuptools</code>，命令如下：</p>
 <pre class=" language-shell"><code class="language-shell">python3 -m pip install --upgrade pip setuptools wheel
 </code></pre>
 <h3 id="问题二："><a href="#问题二：" class="headerlink" title="问题二："></a>问题二：</h3><p>构建二进制包的时候出现问题：</p>
-<p><img src="/2023/05/16/visionfive2dockercompose-an-zhuang-ji-wen-ti/.%5CVisionfive2DockerCompose%E5%AE%89%E8%A3%85%E5%8F%8A%E9%97%AE%E9%A2%98%5Cimage-20230516183414546.png" alt="image-20230516183414546"></p>
+<p><img src="/2023/05/16/visionfive2dockercompose-an-zhuang-ji-wen-ti/image-20230516183414546.png" alt="image-20230516183414546"></p>
 <p><strong>解决方法：</strong></p>
 <p>缺少了<code>cargo</code>包。<code>Cargo</code>是专门为Rust语言开发的工具，用于构建、测试、依赖管理和发布Rust项目。它提供了一套简单而强大的命令行接口，使得管理Rust项目的依赖关系、构建可执行文件和库、运行测试等变得更加方便和高效。</p>
 <pre class=" language-shell"><code class="language-shell">apt install cargo
