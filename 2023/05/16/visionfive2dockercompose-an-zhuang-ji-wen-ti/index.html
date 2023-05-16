@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="GSight阅读, “程序员”">
+    <meta name="keywords" content="Visionfive2 DockerCompose安装及问题, “程序员”">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>GSight阅读 | 毛泽政的博客</title>
+    <title>Visionfive2 DockerCompose安装及问题 | 毛泽政的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -289,12 +289,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://event-driven.io/static/67fd4c42f3de35627317b5d2fe97ce92/00d43/2022-05-11-cover.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">GSight阅读</h1>
+                    <h1 class="description center-align post-title">Visionfive2 DockerCompose安装及问题</h1>
                 </div>
             </div>
         </div>
@@ -408,9 +408,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/VisionFive2/">
+                                <span class="chip bg-color">VisionFive2</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -418,8 +422,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Serverless-Partial-Interference/" class="post-category">
-                                Serverless, Partial Interference
+                            <a href="/categories/VisionFive2/" class="post-category">
+                                VisionFive2
                             </a>
                         
                     </div>
@@ -431,7 +435,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-05-09
+                    2023-05-16
                 </div>
                 
 
@@ -452,69 +456,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="GSight阅读"><a href="#GSight阅读" class="headerlink" title="GSight阅读"></a>GSight阅读</h1><p><code>Understanding, Predicting and Scheduling Serverless Workloads under Partial Interference</code></p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>函数分类总结：</p>
-<ol>
-<li><strong>schedulerd backend(BG):</strong> 间歇性的触发和调度，没有时间上的要求。</li>
-<li><strong>short-term computing(SC):</strong> 分钟级别的处理时间，毫秒级别的变化没有影响。</li>
-<li><strong>latency sensitive(LS):</strong> 频繁调用的函数，对延迟十分敏感。</li>
-</ol>
-<h2 id="Understanding-Partial-Interference"><a href="#Understanding-Partial-Interference" class="headerlink" title="Understanding Partial Interference"></a>Understanding Partial Interference</h2><p>部分干扰<code>(partial interference)</code>特性：</p>
-<ol>
-<li><p><strong>高波动性：</strong> 函数的执行行为和资源消耗方面的多样性。</p>
-<ul>
-<li><strong>测试分类：CPU密集型、IO密集型、网络密集型</strong></li>
-</ul>
-</li>
-<li><p><strong>空间变化：</strong> 函数的小体积和无状态，导致了部分干扰的空间变化。</p>
-<ul>
-<li>函数的小体积导致了部署的高密度，无状态导致了空间的多样性。</li>
-<li>即使是相同的工作负载的争用，端到端延迟也会有很大差别。</li>
-</ul>
-</li>
-<li><p><strong>时间变化：</strong> 函数的存活时间很短，所以干扰的变化也是时间变化的。</p>
-<ul>
-<li>函数在不同阶段的重叠可能造成不一样的延迟情况，比如这张图中的：LR与KMeans竞争资源，随着时间偏移，LR的时间先增后减，这也就说明在中间的执行阶段两个任务抢占同样的资源较为激烈。</li>
-</ul>
-<p><img src="/2023/05/09/gsight/image-20230509190437914.png" alt="image-20230509190437914"></p>
-</li>
-</ol>
-<blockquote>
-<p>空间和时间两种变化应该是指不同函数之间类型和阶段的干扰</p>
-</blockquote>
-<p><img src="/2023/05/09/gsight/image-20230509203811774.png" alt="image-20230509203811774"></p>
-<ol start="4">
-<li><strong>热点传播：</strong> 部分干扰触发了链式影响，但是对后续函数的影响与本地函数相反。<ul>
-<li>对于后续的调用函数，因为前面的函数的延迟增加导致了QPS降低，所以他们的本地延迟也降低了。</li>
-<li>对于Openfaas和Openwhisk这样的框架，他们都有一个前端的gateway接受请求，然后转发给后端执行。所以gateway就是阻塞后续函数的部分。</li>
-</ul>
-</li>
-<li><strong>恢复传播：</strong> 恢复也会传播。<ul>
-<li>橙色的虚线部分主要是将竞争的函数放在了其他节点上然后再进行了测试，可以发现，不论是原来受影响的函数还是后续的函数都逐渐恢复了正常。</li>
-</ul>
-</li>
-<li><strong>预测性：</strong> 通过<strong>函数级别</strong>的刻画来获得准确的<strong>部分干扰</strong>。</li>
-</ol>
-<p>serverless函数的性能预测受到部分干扰的影响，为了设计准确的性能预测，首先是需要利用空间和时间两个维度的变化进行预测。其次，他应该是一种整体方法，需要捕捉由于干扰引起的端到端性能变化。最后，应该广泛利用函数级别的刻画。</p>
-<h2 id="Predicting-with-Gsight"><a href="#Predicting-with-Gsight" class="headerlink" title="Predicting with Gsight"></a>Predicting with Gsight</h2><h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h3><p>在部分干扰下的QoS的精确预测可以通过“时空干扰感知”的增量学习模型来完成，该模型通过对函数的刻画结果作为输入来快速收敛。</p>
-<h3 id="刻画"><a href="#刻画" class="headerlink" title="刻画"></a>刻画</h3><p>这一部分主要描述了干扰刻画的方式</p>
-<p>现有的方式主要有两种（刻画的高开销）：</p>
-<ul>
-<li>成对放置运行：直接将两个函数放在一起执行然后测试其QoS降低程度。</li>
-<li>微benchmark测试：将单独设计的函数benchmark和函数放在一起执行，通过benchmark的结果得到QoS。</li>
-</ul>
-<p>这篇文章通过<code>solo-run</code>的方式收集运行时参数，然后将运行时参数传入预测模型计算干扰。机器学习的输入包括了收集到的<em>系统级</em>和<em>微架构级</em>的参数以及工作负载的特征（包括IL工作的IPC和尾延迟，SC工作的JCT）。</p>
-<h3 id="增量学习"><a href="#增量学习" class="headerlink" title="增量学习"></a>增量学习</h3><p>由于模型在开始时缺少数据集，并且workload在不断的变化。所以采用在线增量的方式最合适。</p>
-<p>首先准备一个小的工作负载的数据集已经相关的QoS，用于生成一个最初的训练模型，在执行期间在使用新的指标和实际运行的QoS对数据集进行扩展。如下的公式展示了基本情况：</p>
-<p><img src="/2023/05/09/gsight/RM%E6%80%BB%E4%BD%93.png" alt="image-20230509203811774"></p>
-<p>$RM$是模型的缩写，$R$是对下表对应的作业的资源配置，$U$是系统层和微架构层收集的各种资源的实际利用率和性能监控计数器，$D$代表启动延迟，$T$代表<code>solo-run</code>期间的生命时间长度。</p>
-<blockquote>
-<p>空间和时间的设计也体现在这里的$D$和$R&amp;U$上</p>
-</blockquote>
-<p>预测模型的空间时间设计不赘述。</p>
-<h3 id="学习模型"><a href="#学习模型" class="headerlink" title="学习模型"></a>学习模型</h3><p>Incremental RFR (IRFR)</p>
-<h2 id="Scheduling-using-Gsight"><a href="#Scheduling-using-Gsight" class="headerlink" title="Scheduling using Gsight"></a>Scheduling using Gsight</h2><p>调度目的：将函数实例部署在最小数量的活动服务器上，在保证函数的QoS上最大限度的提高资源利用率。</p>
-
+                
                 
             </div>
             <hr/>
@@ -540,7 +482,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://maozzzzz.github.io/2023/05/09/gsight/">https://maozzzzz.github.io/2023/05/09/gsight/</a>
+                    <a href="https://maozzzzz.github.io/2023/05/16/visionfive2dockercompose-an-zhuang-ji-wen-ti/">https://maozzzzz.github.io/2023/05/16/visionfive2dockercompose-an-zhuang-ji-wen-ti/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -577,7 +519,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/VisionFive2/">
+                                    <span class="chip bg-color">VisionFive2</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -745,9 +691,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2023/05/16/visionfive2dockercompose-an-zhuang-ji-wen-ti/">
                     <div class="card-image">
@@ -764,9 +711,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-16
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-16
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -779,6 +726,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -797,12 +745,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/05/03/visionfive2-ke-xue-shang-wang/">
+                <a href="/2023/05/09/gsight/">
                     <div class="card-image">
                         
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Clash_Logo.png" class="responsive-img" alt="Visionfive2 科学上网">
                         
-                        <span class="card-title">Visionfive2 科学上网</span>
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="GSight阅读">
+                        
+                        <span class="card-title">GSight阅读</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -813,27 +762,19 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-09
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/VisionFive2/" class="post-category">
-                                    VisionFive2
+                            <a href="/categories/Serverless-Partial-Interference/" class="post-category">
+                                    Serverless, Partial Interference
                                 </a>
                             
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/VisionFive2/">
-                        <span class="chip bg-color">VisionFive2</span>
-                    </a>
-                    
                 </div>
                 
             </div>
